@@ -4,6 +4,6 @@
   users.users."aether" = {
     isNormalUser = true;
     description = "Aether";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "input" ];
   };
 }
