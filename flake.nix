@@ -14,14 +14,16 @@
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
 
     mars-display.url = "github:5aether/mars-display";
+
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
   };
 
   outputs = inputs@{ self, nixpkgs, ... }: {
     nixosConfigurations = {
       desktop = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
-          { nixpkgs.hostPlatform = "x86_64-linux"; }
           ./desktop/config.nix
         ];
       };
