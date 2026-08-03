@@ -6,7 +6,7 @@
     rofi
     xwayland-satellite
     nautilus
-    fastfetch
+    fetch
 
     # Editor
     neovim
