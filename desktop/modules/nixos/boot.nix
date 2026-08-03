@@ -33,4 +33,11 @@
     enable = true;
     binfmt = true;
   };
+
+  # Scheduler
+  services.scx = {
+    enable = true;
+    scheduler = "scx_lavd";
+    extraArgs = [ "--performance" "--pinned-slice-us" "500" ];
+  };
 }
