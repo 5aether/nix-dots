@@ -119,8 +119,7 @@
         "desktop-widget-0000000000000004",
         "desktop-widget-0000000000000005",
         "desktop-widget-0000000000000006",
-        "desktop-widget-0000000000000007",
-        "desktop-widget-0000000000000008"
+        "desktop-widget-0000000000000007"
     ]
 
         [desktop_widgets.grid]
@@ -168,26 +167,28 @@
             background = false
 
         [desktop_widgets.widget.desktop-widget-0000000000000005]
-        box_height = 0.0
-        box_width = 0.0
-        cx = 1708.0
-        cy = 314.0
-        enabled = true
-        output = "HDMI-A-1"
-        rotation = 0.0
-        type = "weather"
-
-            [desktop_widgets.widget.desktop-widget-0000000000000005.settings]
-
-        [desktop_widgets.widget.desktop-widget-0000000000000006]
         box_height = 112.0
         box_width = 176.0
-        cx = 1620.0
-        cy = 868.0
+        cx = 1640.0
+        cy = 268.0
         enabled = true
         output = "HDMI-A-1"
         rotation = 0.0
         type = "sysmon"
+
+            [desktop_widgets.widget.desktop-widget-0000000000000005.settings]
+            stat = "cpu_usage"
+            stat2 = "cpu_temp"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000006]
+        box_height = 0.0
+        box_width = 0.0
+        cx = 1629.0
+        cy = 828.0
+        enabled = true
+        output = "HDMI-A-1"
+        rotation = 0.0
+        type = "media_player"
 
             [desktop_widgets.widget.desktop-widget-0000000000000006.settings]
             stat = "cpu_usage"
@@ -196,26 +197,14 @@
         [desktop_widgets.widget.desktop-widget-0000000000000007]
         box_height = 0.0
         box_width = 0.0
-        cx = 221.0
-        cy = 914.0
-        enabled = true
-        output = "HDMI-A-1"
-        rotation = 0.0
-        type = "media_player"
-
-            [desktop_widgets.widget.desktop-widget-0000000000000007.settings]
-
-        [desktop_widgets.widget.desktop-widget-0000000000000008]
-        box_height = 0.0
-        box_width = 0.0
-        cx = 342.0
+        cx = 272.0
         cy = 556.0
         enabled = true
         output = "HDMI-A-1"
         rotation = 0.0
         type = "fancy_audio_visualizer"
 
-            [desktop_widgets.widget.desktop-widget-0000000000000008.settings]
+            [desktop_widgets.widget.desktop-widget-0000000000000007.settings]
             background = false
 
     [dock]
