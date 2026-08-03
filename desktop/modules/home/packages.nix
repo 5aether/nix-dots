@@ -7,6 +7,7 @@
     xwayland-satellite
     nautilus
     fetch
+    wl-clipboard
 
     # Editor
     neovim

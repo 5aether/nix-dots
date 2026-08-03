@@ -30,6 +30,8 @@
       "nofail"
       "noatime"
       "exec"
+      "x-gvfs-show"
+      "x-gvfs-name=Volume"
     ];
   };
 

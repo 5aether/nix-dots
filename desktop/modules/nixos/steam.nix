@@ -12,6 +12,7 @@
       enable = true;
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
+      protontricks.enable = true;
       extraCompatPackages = with pkgs; [
         proton-ge-bin
       ];
