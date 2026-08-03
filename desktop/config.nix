@@ -14,6 +14,7 @@
     ./modules/nixos/noctalia.nix
     ./modules/nixos/nvidia.nix
     ./modules/nixos/pipewire.nix
+    ./modules/nixos/services.nix
     ./modules/nixos/steam.nix
     ./modules/nixos/users.nix
     ./modules/nixos/x11.nix
@@ -23,7 +24,13 @@
   fileSystems."/mnt/Volume" = {
     device = "/dev/disk/by-label/Volume";
     fsType = "ext4";
-    options = [ "nofail" "noatime" ];
+    options = [
+      "nofail"
+      "noatime"
+      "x-gvfs-show"
+      "user"
+      "x-gvfs-name=Volume"
+    ];
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
