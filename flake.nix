@@ -12,6 +12,8 @@
     noctalia.url = "github:noctalia-dev/noctalia";
 
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+
+    mars-display.url = "github:5aether/mars-display";
   };
 
   outputs = inputs@{ self, nixpkgs, ... }: {
