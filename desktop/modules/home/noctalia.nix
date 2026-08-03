@@ -82,7 +82,7 @@
     [control_center]
     hidden_tabs = [ "weather" ]
     show_shortcut_labels = true
-    sidebar = "compact"
+    sidebar = "full"
     sidebar_section = "none"
     width = 700
 
@@ -433,7 +433,7 @@
     offset_x = 15
     offset_y = 8
     orientation = "vertical"
-    position = "center_right"
+    position = "top_center"
     position_vertical = "center_right"
     scale = 1.0
 
@@ -553,14 +553,14 @@
         clipboard_placement = "floating"
         clipboard_position = "center"
         control_center_placement = "floating"
-        control_center_position = "top_center"
+        control_center_position = "auto"
         floating_layer = "overlay"
         floating_offset = 8
         launcher_placement = "floating"
-        launcher_position = "top_center"
+        launcher_position = "top_left"
         list_item_background = false
         open_near_click_clipboard = false
-        open_near_click_control_center = false
+        open_near_click_control_center = true
         open_near_click_launcher = false
         open_near_click_session = false
         open_near_click_wallpaper = false
