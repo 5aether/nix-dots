@@ -29,9 +29,7 @@
     options = [
       "nofail"
       "noatime"
-      "x-gvfs-show"
-      "user"
-      "x-gvfs-name=Volume"
+      "exec"
     ];
   };
 
