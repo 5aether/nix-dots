@@ -154,6 +154,7 @@
           Print { spawn-sh "noctalia msg screenshot-fullscreen pick";        }
           Alt+Print { spawn-sh "noctalia msg plugin noctalia/screen_recorder:service all toggle"; }
           Mod+P { spawn-sh "noctalia msg panel-open session"; }
+          Mod+V { spawn-sh "noctalia msg panel-toggle clipboard"; }
 
 
           Mod+Left  { focus-column-left;  }
