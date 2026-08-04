@@ -8,6 +8,7 @@
     nautilus
     fetch
     wl-clipboard
+    ddcutil
 
     # Editor
     neovim
