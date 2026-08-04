@@ -8,7 +8,7 @@
       "nixp" = "nvim ~/nix-dots/desktop/modules/home/packages.nix";
       "nixe" = "sudo nix-collect-garbage -d; sudo nixos-rebuild switch --flake ~/nix-dots#desktop";
       "nixr" = "sudo nixos-rebuild switch --flake ~/nix-dots#desktop";
-      "noctup" = "noctalia config export full >> ~/nix-dots/desktop/modules/home/noctalia.toml";
+      "noctup" = "noctalia config export full >> ~/nix-dots/desktop/modules/home/noctalia.toml; sudo nixos-rebuild switch --flake ~/nix-dots#desktop";
     };
 
     initExtra = ''
