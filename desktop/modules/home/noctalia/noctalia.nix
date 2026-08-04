@@ -3,6 +3,6 @@
 {
   programs.noctalia = {
     enable = true;
-    settings = ./noctalia.toml;
+    settings = ./config.toml;
   };
 }
