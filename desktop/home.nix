@@ -5,7 +5,7 @@
     inputs.noctalia.homeModules.default
     inputs.spicetify-nix.homeManagerModules.spicetify
     inputs.waterfox-flake.homeManagerModules.default
-    ./modules/home/noctalia/noctalia.nix
+    ./modules/home/noctalia/package.nix
     ./modules/home/bash.nix
     ./modules/home/git.nix
     ./modules/home/gtk.nix
