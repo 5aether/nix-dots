@@ -16,6 +16,8 @@
     mars-display.url = "github:5aether/mars-display";
 
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+
+    waterfox-flake.url = "github:5aether/waterfox-flake";
   };
 
   outputs = inputs@{ self, nixpkgs, ... }: {

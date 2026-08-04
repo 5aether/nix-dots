@@ -233,7 +233,7 @@
     margin_edge = 6
     margin_ends = 0
     monitors = []
-    pinned = [ "kitty", "firefox", "org.gnome.Nautilus", "dev.zed.Zed", "steam", "equibop", "feishin" ]
+    pinned = [ "kitty", "waterfox", "org.gnome.Nautilus", "dev.zed.Zed", "steam", "equibop", "feishin" ]
     position = "bottom"
     radius = 15
     radius_bottom_left = 15
