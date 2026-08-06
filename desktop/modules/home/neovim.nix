@@ -45,7 +45,29 @@
       })
 
       require('lualine').setup()
-      require('telescope').setup()
+
+      require('telescope').setup({
+        defaults = {
+          -- used by live_grep / grep_string
+          vimgrep_arguments = {
+            "rg",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+            "--hidden",
+            "--glob=!**/.git/*",
+          },
+        },
+        pickers = {
+          find_files = {
+            hidden = true,
+            find_command = { "rg", "--files", "--glob=!**/.git/*" },
+          },
+        },
+      })
 
       require('bufferline').setup({
         options = {
