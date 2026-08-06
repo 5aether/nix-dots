@@ -1,5 +1,3 @@
-{ config, ... }:
-
 {
   time.timeZone = "Europe/Rome";
   i18n = {

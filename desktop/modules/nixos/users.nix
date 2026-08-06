@@ -1,5 +1,3 @@
-{ config, ... }:
-
 {
   users.users."aether" = {
     isNormalUser = true;

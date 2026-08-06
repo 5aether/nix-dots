@@ -1,5 +1,3 @@
-{ config, pkgs, ... }:
-
 {
   home.file.".config/niri/config.kdl".text = ''
       include optional=true "~/.config/niri/noctalia.kdl"

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   proton-ge9-20 = pkgs.stdenv.mkDerivation rec {
