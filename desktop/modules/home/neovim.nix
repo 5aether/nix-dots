@@ -13,6 +13,7 @@
       clang-tools
       nixfmt
       stylua
+      ripgrep
     ];
 
     plugins = with pkgs.vimPlugins; [
@@ -143,7 +144,10 @@
       vim.keymap.set("n", "<leader><Right>", ":BufferLineCycleNext<CR>", { desc = "Cycle next tab" })
       vim.keymap.set({"n", "t"}, "<leader>j", "<cmd>ToggleTerm<CR>", { desc = "Toggle Terminal" })
 
-      vim.keymap.set({ "n", "v" }, "<leader>f", function()
+      vim.keymap.set("n", "<leader>f", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
+      vim.keymap.set("n", "<leader>d", "<cmd>Telescope live_grep<CR>", { desc = "Search words in files" })
+      
+      vim.keymap.set({ "n", "v" }, "<leader>F", function()
         require("conform").format({ async = true, lsp_fallback = true })
       end, { desc = "Format file" })
 
