@@ -10,6 +10,7 @@
     ./modules/home/git.nix
     ./modules/home/gtk.nix
     ./modules/home/kitty.nix
+    ./modules/home/neovim.nix
     ./modules/home/niri.nix
     ./modules/home/packages.nix
     ./modules/home/spicetify.nix

@@ -9,9 +9,9 @@
     fetch
     wl-clipboard
     ddcutil
+    btop
 
     # Editor
-    neovim
     zed-editor
 
     # Social
