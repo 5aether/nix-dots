@@ -289,11 +289,11 @@
 
       -- Search and replace in the current file, prompting on the command line.
       local function replace_in_file()
-        vim.ui.input({ prompt = "Cerca: " }, function(search)
+        vim.ui.input({ prompt = "Search: " }, function(search)
           if not search or search == "" then
             return
           end
-          vim.ui.input({ prompt = "Sostituisci con: " }, function(replace)
+          vim.ui.input({ prompt = "Replace with: " }, function(replace)
             if not replace then
               return
             end
