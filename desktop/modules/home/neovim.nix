@@ -38,8 +38,8 @@
             return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
           end
 
-          vim.keymap.set('n', '+', api.tree.change_root_to_node, opts('CD into folder'))
-          vim.keymap.set('n', '-', api.tree.change_root_to_parent, opts('CD to parent folder'))
+          vim.keymap.set('n', 'n', api.tree.change_root_to_node, opts('CD into folder'))
+          vim.keymap.set('n', 'b', api.tree.change_root_to_parent, opts('CD to parent folder'))
           vim.keymap.set('n', '<RightMouse>', api.tree.change_root_to_node, opts('CD into folder'))
         end,
       })
