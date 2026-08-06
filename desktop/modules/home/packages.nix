@@ -9,7 +9,6 @@
     fetch
     wl-clipboard
     ddcutil
-    btop
 
     # Editor
     zed-editor

@@ -7,6 +7,7 @@
     inputs.waterfox-flake.homeManagerModules.default
     ./modules/home/noctalia/package.nix
     ./modules/home/bash.nix
+    ./modules/home/btop.nix
     ./modules/home/git.nix
     ./modules/home/gtk.nix
     ./modules/home/kitty.nix
