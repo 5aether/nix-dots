@@ -14,6 +14,11 @@
       pyright
       rust-analyzer
 
+      # rust_analyzer resolves its root through `rustc --print sysroot` and
+      # `cargo metadata`, so both have to be on neovim's PATH.
+      cargo
+      rustc
+
       # Formatters
       black
       nixfmt
@@ -106,6 +111,19 @@
         group = user_group,
         desc = "Reapply the custom highlights after a colorscheme change",
         callback = apply_highlights,
+      })
+
+      -- The bundled ftplugins override the indent options per filetype
+      -- (rust and python both force 4). This puts our own back.
+      vim.api.nvim_create_autocmd("FileType", {
+        group = user_group,
+        desc = "Keep a 2 space indent in every filetype",
+        callback = function(args)
+          vim.bo[args.buf].tabstop = 2
+          vim.bo[args.buf].shiftwidth = 2
+          vim.bo[args.buf].softtabstop = 2
+          vim.bo[args.buf].expandtab = true
+        end,
       })
 
       -- Treesitter highlighting for every filetype that has a parser.
