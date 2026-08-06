@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   programs.neovim = {
@@ -8,40 +8,60 @@
     vimAlias = true;
 
     extraPackages = with pkgs; [
-      rustfmt
-      black
+      # LSP servers
       clang-tools
-      nixfmt
-      stylua
-      ripgrep
-      fd
-      rust-analyzer
+      nixd
       pyright
-      nil
+      rust-analyzer
+
+      # Formatters
+      black
+      nixfmt
+      rustfmt
+      stylua
+
+      # Search backends for telescope
+      fd
+      ripgrep
     ];
 
     plugins = with pkgs.vimPlugins; [
-      nvim-tree-lua
-      nvim-web-devicons
+      # Dependencies
       plenary-nvim
+      nvim-web-devicons
+
+      # UI
+      alpha-nvim
+      bufferline-nvim
+      lualine-nvim
+      nvim-tree-lua
+      nvim-treesitter.withAllGrammars
+      toggleterm-nvim
+
+      # Fuzzy finder
       telescope-nvim
       telescope-file-browser-nvim
-      nvim-treesitter.withAllGrammars
-      lualine-nvim
-      bufferline-nvim
-      toggleterm-nvim
-      conform-nvim
-      alpha-nvim
+
+      # LSP, completion and formatting
+      nvim-lspconfig
       nvim-cmp
       cmp-nvim-lsp
       cmp-buffer
       cmp-path
-      luasnip
       cmp_luasnip
-      nvim-lspconfig
+      luasnip
+      conform-nvim
     ];
 
     initLua = ''
+      -- The leader must be set before any <leader> mapping is created.
+      vim.g.mapleader = " "
+      vim.g.maplocalleader = " "
+
+      -- nvim-tree replaces netrw, which has to be disabled as early as possible.
+      vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+
       -- Options
       vim.opt.number = true
       vim.opt.tabstop = 2
@@ -49,12 +69,120 @@
       vim.opt.expandtab = true
       vim.opt.termguicolors = true
       vim.opt.mouse = "a"
-      vim.opt.fillchars = { eob = " " } 
+      vim.opt.fillchars = { eob = " " }
+
+      -- Highlights: dashboard colors and transparent background.
+      local transparent_groups = {
+        "Normal",
+        "NormalNC",
+        "NormalFloat",
+        "FloatBorder",
+        "NvimTreeNormal",
+        "NvimTreeNormalNC",
+        "SignColumn",
+        "LineNr",
+        "CursorLine",
+        "CursorLineNr",
+        "EndOfBuffer",
+        "MsgArea",
+        "ToggleTerm",
+        "ToggleTermNormal",
+      }
+
+      local function apply_highlights()
+        vim.api.nvim_set_hl(0, "AlphaHeader", { fg = "#89b4fa", bold = true })
+        vim.api.nvim_set_hl(0, "AlphaButtons", { bold = true })
+        vim.api.nvim_set_hl(0, "AlphaShortcut", { fg = "#f38ba8", bold = true })
+        for _, group in ipairs(transparent_groups) do
+          vim.api.nvim_set_hl(0, group, { bg = "NONE", ctermbg = "NONE" })
+        end
+      end
+
+      apply_highlights()
+
+      local user_group = vim.api.nvim_create_augroup("user_config", { clear = true })
+
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        group = user_group,
+        desc = "Reapply the custom highlights after a colorscheme change",
+        callback = apply_highlights,
+      })
+
+      -- Treesitter highlighting for every filetype that has a parser.
+      vim.api.nvim_create_autocmd("FileType", {
+        group = user_group,
+        desc = "Start treesitter when a parser is available",
+        callback = function(args)
+          pcall(vim.treesitter.start, args.buf)
+        end,
+      })
+
+      -- Telescope
+      local telescope = require("telescope")
+      local skip_git = "--glob=!**/.git/*"
+
+      telescope.setup({
+        defaults = {
+          vimgrep_arguments = {
+            "rg",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+            "--hidden",
+            skip_git,
+          },
+        },
+        pickers = {
+          -- telescope appends --hidden to the rg command when hidden is set.
+          find_files = { hidden = true, find_command = { "rg", "--files", skip_git } },
+        },
+      })
+      pcall(telescope.load_extension, "file_browser")
+
+      -- Pick a directory below $HOME, make it the cwd and open the tree there.
+      local function select_directory()
+        local actions = require("telescope.actions")
+        local action_state = require("telescope.actions.state")
+
+        require("telescope.builtin").find_files({
+          prompt_title = "Select Directory",
+          cwd = vim.fn.expand("~"),
+          find_command = { "fd", "--type", "d", "--hidden", "--exclude", ".git", "--absolute-path" },
+          attach_mappings = function(prompt_bufnr)
+            actions.select_default:replace(function()
+              actions.close(prompt_bufnr)
+              local selection = action_state.get_selected_entry()
+              local dir = selection and selection[1]
+              if dir then
+                vim.cmd.cd(vim.fn.fnameescape(dir))
+                require("nvim-tree.api").tree.open({ path = dir })
+              end
+            end)
+            return true
+          end,
+        })
+      end
+
+      vim.api.nvim_create_user_command("SelectDirectory", select_directory, {
+        desc = "Pick a directory, cd into it and open the file tree",
+      })
 
       -- Dashboard
-      local alpha = require('alpha')
-      local dashboard = require('alpha.themes.dashboard')
+      local alpha = require("alpha")
+      local dashboard = require("alpha.themes.dashboard")
 
+      -- dashboard.button() hardcodes its highlight groups, so patch ours in.
+      local function button(shortcut, text, command)
+        local btn = dashboard.button(shortcut, text, command)
+        btn.opts.hl = { { "AlphaButtons", 0, -1 } }
+        btn.opts.hl_shortcut = "AlphaShortcut"
+        return btn
+      end
+
+      dashboard.section.header.opts.hl = "AlphaHeader"
       dashboard.section.header.val = {
         [[    _        _   _                ]],
         [[   / \   ___| |_| |__   ___ _ __  ]],
@@ -63,123 +191,144 @@
         [[/_/   \_\___|\__|_| |_|\___|_|    ]],
       }
 
-      -- Dashboard buttons (e apre il file browser partendo da ~ con file nascosti)
       dashboard.section.buttons.val = {
-        dashboard.button("n", "  New file", ":enew<CR>"),
-        dashboard.button("f", "  Find file", ":Telescope find_files<CR>"),
-        dashboard.button("d", "󰈭  Find word", ":Telescope live_grep<CR>"),
-        dashboard.button("e", "  Enter a path", ":lua require('telescope').extensions.file_browser.file_browser({ path = vim.fn.expand('~'), hidden = true })<CR>"),
-        dashboard.button("q", "  Quit", ":qa<CR>"),
+        button("n", "  New file", ":enew<CR>"),
+        button("f", "  Find file", ":Telescope find_files<CR>"),
+        button("d", "󰈭  Find word", ":Telescope live_grep<CR>"),
+        button("e", "  Enter a path", ":SelectDirectory<CR>"),
+        button("q", "  Quit", ":qa<CR>"),
       }
 
-      vim.api.nvim_set_hl(0, 'AlphaHeader', { fg = '#89b4fa', bold = true })
-      vim.api.nvim_set_hl(0, 'AlphaButtons', { bold = true })
-      vim.api.nvim_set_hl(0, 'AlphaShortcut', { fg = '#f38ba8', bold = true })
-      
       dashboard.opts.opts.noautocmd = true
       alpha.setup(dashboard.opts)
 
-      -- Autocomplete
-      local cmp = require('cmp')
-      local luasnip = require('luasnip')
+      -- Completion
+      local cmp = require("cmp")
+      local luasnip = require("luasnip")
 
       cmp.setup({
-        snippet = { expand = function(args) luasnip.lsp_expand(args.body) end },
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
+        },
         mapping = cmp.mapping.preset.insert({
-          ['<C-Space>'] = cmp.mapping.complete(),
-          ['<CR>'] = cmp.mapping.confirm({ select = true }),
-          ['<Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then cmp.select_next_item() else fallback() end
-          end, { 'i', 's' }),
+          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-        }, { { name = 'buffer' }, { name = 'path' } })
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
+        }, {
+          { name = "buffer" },
+          { name = "path" },
+        }),
       })
 
-      -- LSP
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
-      
-      vim.lsp.config("nil_ls", {
-        capabilities = capabilities,
+      -- LSP: the server definitions ship with nvim-lspconfig, "*" applies to all of them.
+      vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
+
+      -- nixd evaluates nixpkgs, which is what makes package names completable
+      -- inside `with pkgs; [ ... ]`. The expression pins it to this flake's lock.
+      vim.lsp.config("nixd", {
         settings = {
-          ['nil'] = {
-            formatting = { command = { "nixfmt" } },
-            nix = { flake = { autoEvalInputs = true } },
+          nixd = {
+            nixpkgs = { expr = 'import (builtins.getFlake "/home/aether/nix-dots").inputs.nixpkgs { }' },
           },
         },
       })
-      vim.lsp.enable("nil_ls")
 
-      local servers = { "rust_analyzer", "pyright", "clangd" }
-      for _, server in ipairs(servers) do
-        vim.lsp.config(server, { capabilities = capabilities })
-        vim.lsp.enable(server)
-      end
+      vim.lsp.enable({ "clangd", "nixd", "pyright", "rust_analyzer" })
 
       -- Explorer
-      require('nvim-tree').setup({
+      require("nvim-tree").setup({
         on_attach = function(bufnr)
-          local api = require('nvim-tree.api')
+          local api = require("nvim-tree.api")
           api.config.mappings.default_on_attach(bufnr)
-          local opts = function(desc) return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true } end
-          vim.keymap.set('n', 'n', api.tree.change_root_to_node, opts('CD into folder'))
-          vim.keymap.set('n', 'b', api.tree.change_root_to_parent, opts('CD to parent folder'))
+
+          local function opts(desc)
+            return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+          end
+
+          vim.keymap.set("n", "n", api.tree.change_root_to_node, opts("CD into folder"))
+          vim.keymap.set("n", "b", api.tree.change_root_to_parent, opts("CD to parent folder"))
         end,
       })
 
       -- Statusline
-      require('lualine').setup()
-
-      -- Telescope
-      require('telescope').setup({
-        defaults = { vimgrep_arguments = { "rg", "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case", "--hidden", "--glob=!**/.git/*" } },
-        pickers = { find_files = { hidden = true, find_command = { "rg", "--files", "--glob=!**/.git/*" } } },
-      })
-      pcall(require('telescope').load_extension, 'file_browser')
+      require("lualine").setup()
 
       -- Tabs
-      require('bufferline').setup({
+      require("bufferline").setup({
         options = { diagnostics = "nvim_lsp", show_close_icon = true, separator_style = "thin" },
       })
 
       -- Terminal
-      require('toggleterm').setup({ size = 15, direction = 'horizontal' })
+      require("toggleterm").setup({ size = 15, direction = "horizontal" })
 
       -- Formatter
-      require('conform').setup({
-        formatters_by_ft = { lua = { "stylua" }, python = { "black" }, rust = { "rustfmt" }, c = { "clang-format" }, cpp = { "clang-format" }, nix = { "nixfmt" } },
+      local conform = require("conform")
+
+      conform.setup({
+        formatters_by_ft = {
+          c = { "clang-format" },
+          cpp = { "clang-format" },
+          lua = { "stylua" },
+          nix = { "nixfmt" },
+          python = { "black" },
+          rust = { "rustfmt" },
+        },
       })
 
-      -- Transparency
-      local transparent_groups = { "Normal", "NormalNC", "NormalFloat", "FloatBorder", "NvimTreeNormal", "NvimTreeNormalNC", "SignColumn", "LineNr", "CursorLine", "CursorLineNr", "EndOfBuffer", "MsgArea", "ToggleTerm", "ToggleTermNormal" }
-      for _, group in ipairs(transparent_groups) do vim.api.nvim_set_hl(0, group, { bg = "NONE", ctermbg = "NONE" }) end
+      -- Search and replace in the current file, prompting on the command line.
+      local function replace_in_file()
+        vim.ui.input({ prompt = "Cerca: " }, function(search)
+          if not search or search == "" then
+            return
+          end
+          vim.ui.input({ prompt = "Sostituisci con: " }, function(replace)
+            if not replace then
+              return
+            end
+            local cmd = string.format("%%s/%s/%s/gc", vim.fn.escape(search, "/"), vim.fn.escape(replace, "/"))
+            pcall(vim.cmd, cmd)
+          end)
+        end)
+      end
 
-      -- Treesitter
-      vim.api.nvim_create_autocmd('FileType', {
-        callback = function(args)
-          local lang = vim.treesitter.language.get_lang(args.match)
-          if lang then pcall(vim.treesitter.start, args.buf, lang) end
-        end,
-      })
+      -- Close the current buffer without closing its window.
+      local function close_buffer()
+        local buf = vim.api.nvim_get_current_buf()
+        if #vim.fn.getbufinfo({ buflisted = 1 }) > 1 then
+          vim.cmd.bprevious()
+        end
+        vim.api.nvim_buf_delete(buf, { force = false })
+      end
 
       -- Keybinds
-      vim.g.mapleader = " "
-      vim.keymap.set("n", "<leader>s", ":w<CR>", { desc = "Save" })
-      vim.keymap.set("n", "<leader>e", ":NvimTreeFocus<CR>", { desc = "Explorer" })
-      vim.keymap.set("n", "<leader>f", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
-      vim.keymap.set("n", "<leader>d", "<cmd>Telescope live_grep<CR>", { desc = "Grep" })
-      vim.keymap.set({"n", "t"}, "<leader>j", "<cmd>ToggleTerm<CR>", { desc = "Terminal" })
-      vim.keymap.set({ "n", "v" }, "<leader>F", function() require("conform").format({ async = true, lsp_fallback = true }) end, { desc = "Format" })
-      vim.keymap.set({"n", "t"}, "<leader>w", "<cmd>wincmd w<CR>", { desc = "Cycle windows" })
-      vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
-      
-      vim.keymap.set("n", "<leader>c", function()
-        local current_buf = vim.api.nvim_get_current_buf()
-        if #vim.api.nvim_list_bufs() > 1 then vim.cmd("bprevious") end
-        vim.api.nvim_buf_delete(current_buf, { force = false })
-      end, { desc = "Close buffer" })
+      local function map(mode, lhs, rhs, desc)
+        vim.keymap.set(mode, lhs, rhs, { desc = desc })
+      end
+
+      map("n", "<leader>s", "<cmd>w<CR>", "Save")
+      map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", "Toggle explorer")
+      map("n", "<leader>f", "<cmd>Telescope find_files<CR>", "Find files")
+      map("n", "<leader>d", "<cmd>Telescope live_grep<CR>", "Grep")
+      map("n", "<leader>r", replace_in_file, "Replace in current file")
+      map("n", "<leader>c", close_buffer, "Close buffer")
+      map({ "n", "t" }, "<leader>j", "<cmd>ToggleTerm<CR>", "Terminal")
+      map({ "n", "t" }, "<leader>w", "<cmd>wincmd w<CR>", "Cycle windows")
+      map({ "n", "v" }, "<leader>F", function()
+        conform.format({ async = true, lsp_format = "fallback" })
+      end, "Format")
+      map("t", "<Esc>", [[<C-\><C-n>]], "Exit terminal mode")
     '';
   };
 }
