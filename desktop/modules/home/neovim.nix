@@ -28,7 +28,6 @@
     ];
 
     initLua = ''
-      -- Plugins
       require('nvim-tree').setup({
         on_attach = function(bufnr)
           local api = require('nvim-tree.api')
@@ -47,7 +46,6 @@
       require('lualine').setup()
       require('telescope').setup()
 
-      -- Bufferline
       require('bufferline').setup({
         options = {
           diagnostics = "nvim_lsp",
@@ -99,7 +97,6 @@
         },
       })
 
-      -- Transparency
       local transparent_groups = {
         "Normal", "NormalNC", "NormalFloat", "FloatBorder",
         "NvimTreeNormal", "NvimTreeNormalNC", "NvimTreeCursorLine", "NvimTreeCursorLineNC", 
@@ -119,7 +116,6 @@
         end
       end
 
-      -- Treesitter
       vim.api.nvim_create_autocmd('FileType', {
         callback = function(args)
           local lang = vim.treesitter.language.get_lang(args.match)
@@ -131,7 +127,6 @@
         end,
       })
 
-      -- Settings
       vim.opt.number = true
       vim.opt.tabstop = 2
       vim.opt.shiftwidth = 2
@@ -139,10 +134,8 @@
       vim.opt.termguicolors = true
       vim.opt.mouse = "a"
 
-      -- Leader
       vim.g.mapleader = " "
 
-      -- Keymaps
       vim.keymap.set("n", "<leader>s", ":w<CR>", { desc = "Save the file" })
       vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Toggle Explorer" })
       vim.keymap.set("n", "<leader><Tab>", ":BufferLineCycleNext<CR>", { desc = "Cycle next tab" })
@@ -150,21 +143,13 @@
       vim.keymap.set("n", "<leader><Right>", ":BufferLineCycleNext<CR>", { desc = "Cycle next tab" })
       vim.keymap.set({"n", "t"}, "<leader>j", "<cmd>ToggleTerm<CR>", { desc = "Toggle Terminal" })
 
-      -- Format
       vim.keymap.set({ "n", "v" }, "<leader>f", function()
         require("conform").format({ async = true, lsp_fallback = true })
       end, { desc = "Format file" })
 
-      -- Focus
-      vim.keymap.set("n", "<leader>w", function()
-        if vim.bo.filetype == "NvimTree" then
-          vim.cmd("wincmd p")
-        else
-          vim.cmd("NvimTreeFocus")
-        end
-      end, { desc = "Toggle focus between file and explorer" })
+      vim.keymap.set({"n", "t"}, "<leader>w", "<cmd>wincmd w<CR>", { desc = "Cycle between open windows" })
+      vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, desc = "Exit terminal mode" })
 
-      -- Close buffer
       vim.keymap.set("n", "<leader>c", function()
         local current_buf = vim.api.nvim_get_current_buf()
         local listed_bufs = {}
