@@ -312,6 +312,23 @@
         vim.api.nvim_buf_delete(buf, { force = false })
       end
 
+      -- Delete the word after the cursor, the counterpart of <C-w> in insert mode.
+      local function delete_word_forward()
+        local line = vim.api.nvim_get_current_line()
+        local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+        local rest = line:sub(col + 1)
+        -- Same boundaries as `dw`: a run of spaces, or a word plus the spaces after it.
+        local removed = rest:match("^%s+") or rest:match("^[%w_]+%s*") or rest:match("^[^%w_%s]+%s*")
+
+        if removed then
+          vim.api.nvim_set_current_line(line:sub(1, col) .. rest:sub(#removed + 1))
+        elseif row < vim.api.nvim_buf_line_count(0) then
+          -- Nothing left on this line, so the break and the next indent are the run to delete.
+          local next_line = vim.api.nvim_buf_get_lines(0, row, row + 1, true)[1]
+          vim.api.nvim_buf_set_lines(0, row - 1, row + 1, true, { line .. next_line:gsub("^%s+", "") })
+        end
+      end
+
       -- Keybinds
       local function map(mode, lhs, rhs, desc)
         vim.keymap.set(mode, lhs, rhs, { desc = desc })
@@ -329,6 +346,12 @@
         conform.format({ async = true, lsp_format = "fallback" })
       end, "Format")
       map("t", "<Esc>", [[<C-\><C-n>]], "Exit terminal mode")
+
+      -- Ctrl+Backspace deletes the word before the cursor, Ctrl+Del the one after it.
+      -- Terminals without the kitty keyboard protocol send Ctrl+Backspace as <C-h>.
+      map("i", "<C-BS>", "<C-w>", "Delete word before cursor")
+      map("i", "<C-h>", "<C-w>", "Delete word before cursor")
+      map("i", "<C-Del>", delete_word_forward, "Delete word after cursor")
     '';
   };
 }
