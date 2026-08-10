@@ -15,6 +15,20 @@ let
       tar -C $out --strip-components=1 -xf $src
     '';
   };
+  dwproton-11-0 = pkgs.stdenv.mkDerivation rec {
+    pname = "dwproton-11.0-10";
+    version = "dwproton-11.0-10";
+
+    src = pkgs.fetchurl {
+      url = "https://dawn.wine/dawn-winery/dwproton/releases/download/${version}/${version}-x86_64.tar.xz";
+      hash = "sha256-lgJI+nSKsvSl78osSsg19mCEXmiAGeTgXIAY4U3d0SA=";
+    };
+
+    buildCommand = ''
+      mkdir -p $out
+      tar -C $out --strip-components=1 -xf $src
+    '';
+  };
 in
 {
   programs = {
@@ -33,6 +47,7 @@ in
       extraCompatPackages = with pkgs; [
         proton-ge-bin
         proton-ge9-20
+        dwproton-11-0
       ];
     };
   };
