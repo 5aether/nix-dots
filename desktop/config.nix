@@ -19,10 +19,21 @@
     ./modules/nixos/repos.nix
     ./modules/nixos/services.nix
     ./modules/nixos/steam.nix
+    ./modules/nixos/tailscale.nix
     ./modules/nixos/users.nix
     ./modules/nixos/x11.nix
     ./drives.nix
   ];
+
+  services.netbird = {
+    enable = true;
+    ui.enable = false;
+    useRoutingFeatures = "both";
+    clients.default = {
+      autoStart = true;
+      openFirewall = true;
+    };
+  };
 
   fileSystems."/mnt/Volume" = {
     device = "/dev/disk/by-label/Volume";

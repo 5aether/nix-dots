@@ -8,6 +8,7 @@
     ./modules/home/noctalia/package.nix
     ./modules/home/bash.nix
     ./modules/home/btop.nix
+    ./modules/home/cm-redirect.nix
     ./modules/home/git.nix
     ./modules/home/gtk.nix
     ./modules/home/kitty.nix
