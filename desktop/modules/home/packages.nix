@@ -10,6 +10,9 @@
     wl-clipboard
     ddcutil
 
+    # Editor
+    zed-editor
+
     # Social
     equibop
     materialgram
