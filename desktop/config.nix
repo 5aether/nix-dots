@@ -25,16 +25,6 @@
     ./drives.nix
   ];
 
-  services.netbird = {
-    enable = true;
-    ui.enable = false;
-    useRoutingFeatures = "both";
-    clients.default = {
-      autoStart = true;
-      openFirewall = true;
-    };
-  };
-
   fileSystems."/mnt/Volume" = {
     device = "/dev/disk/by-label/Volume";
     fsType = "ext4";
