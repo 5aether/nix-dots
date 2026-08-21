@@ -3,18 +3,17 @@
 {
   imports = [
     inputs.home-manager.nixosModules.default
-    inputs.noctalia.nixosModules.default
     inputs.mars-display.nixosModules.default
     ./modules/nixos/boot.nix
     ./modules/nixos/cups.nix
     ./modules/nixos/fonts.nix
     ./modules/nixos/home-manager.nix
+    ./modules/nixos/hyprland.nix
     ./modules/nixos/locale-time.nix
     ./modules/nixos/mars-display.nix
     ./modules/nixos/networking.nix
-    ./modules/nixos/niri.nix
-    ./modules/nixos/noctalia.nix
     ./modules/nixos/nvidia.nix
+    ./modules/nixos/packages.nix
     ./modules/nixos/pipewire.nix
     ./modules/nixos/repos.nix
     ./modules/nixos/services.nix

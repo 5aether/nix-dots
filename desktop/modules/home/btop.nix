@@ -2,7 +2,7 @@
   programs.btop = {
     enable = true;
     settings = {
-      color_theme = "noctalia";
+      color_theme = "caelestia";
     };
   };
 }
