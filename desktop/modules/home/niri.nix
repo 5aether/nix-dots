@@ -70,8 +70,6 @@
           }
       }
 
-      spawn-at-startup "/home/denis/.config/niri/scripts/noctalia-overview-widgets.sh"
-
       hotkey-overlay {
           skip-at-startup
       }
