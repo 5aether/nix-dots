@@ -21,6 +21,8 @@
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
 
     waterfox-flake.url = "github:5aether/waterfox-flake";
+
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
   };
 
   outputs = inputs@{ self, nixpkgs, ... }: {

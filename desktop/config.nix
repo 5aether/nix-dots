@@ -4,8 +4,10 @@
   imports = [
     inputs.home-manager.nixosModules.default
     inputs.mars-display.nixosModules.default
+    inputs.nix-flatpak.nixosModules.nix-flatpak
     ./modules/nixos/boot.nix
     ./modules/nixos/cups.nix
+    ./modules/nixos/flatpak.nix
     ./modules/nixos/fonts.nix
     ./modules/nixos/home-manager.nix
     ./modules/nixos/hyprland.nix
