@@ -178,7 +178,7 @@
       hl.bind(mod .. " + E",         hl.dsp.exec_cmd(fileManager))
       hl.bind(mod .. " + S",         hl.dsp.window.float({ action = "toggle" }))
       hl.bind(mod .. " + F",         hl.dsp.window.fullscreen({ action = "toggle" }))
-      hl.bind(mod .. " + R",         hl.dsp.exec_cmd(menu))
+      hl.bind(mod .. " + Super_L",   hl.dsp.exec_cmd(menu))
       hl.bind(mod .. " + U",         hl.dsp.exec_cmd(menubak))
       hl.bind(mod .. " + SHIFT + S", hl.dsp.exec_cmd(screenshot))
 
