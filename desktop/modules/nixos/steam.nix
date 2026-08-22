@@ -35,7 +35,6 @@ in
     gamemode.enable = true;
     gamescope = {
       enable = true;
-      enableWsi = true;
       capSysNice = false;
     };
     steam = {

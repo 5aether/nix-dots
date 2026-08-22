@@ -2,10 +2,10 @@
   description = "Aether's NixOS Flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-26.05";
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -19,8 +19,6 @@
     mars-display.url = "github:5aether/mars-display";
 
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
-
-    waterfox-flake.url = "github:5aether/waterfox-flake";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
   };

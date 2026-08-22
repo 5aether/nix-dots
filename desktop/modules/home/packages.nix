@@ -6,7 +6,7 @@
     rofi
     xwayland-satellite
     nautilus
-    fetch
+    fastfetch
     wl-clipboard
     ddcutil
 
@@ -39,9 +39,8 @@
     gst_all_1.gst-libav
   ];
 
-  programs.waterfox = {
+  programs.librewolf = {
     enable = true;
-    policies.DisableTelemetry = true;
   };
 
   nixpkgs.config.allowUnfree = true;

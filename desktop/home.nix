@@ -21,7 +21,7 @@
   home = {
     username = "aether";
     homeDirectory = "/home/aether";
-    stateVersion = "26.11";
+    stateVersion = "26.05";
   };
 
   programs.home-manager.enable = true;
