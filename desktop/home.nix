@@ -2,9 +2,7 @@
 
 {
   imports = [
-    inputs.caelestia-shell.homeManagerModules.default
     inputs.spicetify-nix.homeManagerModules.spicetify
-    ./modules/home/caelestia.nix
     ./modules/home/bash.nix
     ./modules/home/btop.nix
     ./modules/home/cm-redirect.nix

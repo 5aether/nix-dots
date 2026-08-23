@@ -9,11 +9,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    caelestia-shell = {
-      url = "github:caelestia-dots/shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    }; 
-
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
 
     mars-display.url = "github:5aether/mars-display";
