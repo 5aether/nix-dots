@@ -29,8 +29,7 @@
       local terminal    = "kitty"
       local fileManager = "nautilus"
       local menubak     = "rofi -show drun"
-      local menu        = "caelestia shell drawers toggle launcher"
-      local screenshot  = "caelestia shell picker openFreeze"
+      local menu        = "vicinae toggle"
 
       hl.env("XCURSOR_SIZE", "16")
       hl.env("HYPRCURSOR_SIZE", "16")
@@ -178,9 +177,8 @@
       hl.bind(mod .. " + E",         hl.dsp.exec_cmd(fileManager))
       hl.bind(mod .. " + S",         hl.dsp.window.float({ action = "toggle" }))
       hl.bind(mod .. " + F",         hl.dsp.window.fullscreen({ action = "toggle" }))
-      hl.bind(mod .. " + Super_L",   hl.dsp.exec_cmd(menu))
+      hl.bind(mod .. " + R",         hl.dsp.exec_cmd(menu))
       hl.bind(mod .. " + U",         hl.dsp.exec_cmd(menubak))
-      hl.bind(mod .. " + SHIFT + S", hl.dsp.exec_cmd(screenshot))
 
       hl.bind(mod .. " + left",  hl.dsp.focus({ direction = "left" }))
       hl.bind(mod .. " + right", hl.dsp.focus({ direction = "right" }))
