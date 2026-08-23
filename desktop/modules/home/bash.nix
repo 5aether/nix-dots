@@ -6,7 +6,6 @@
       "nixp" = "nvim ~/nix-dots/desktop/modules/home/packages.nix";
       "nixe" = "sudo nix-collect-garbage -d; sudo nixos-rebuild switch --flake ~/nix-dots#desktop";
       "nixr" = "sudo nixos-rebuild switch --flake ~/nix-dots#desktop";
-      "noctalia-config" = "rm -rf ~/nix-dots/desktop/modules/home/noctalia/config.toml; noctalia config export full >> ~/nix-dots/desktop/modules/home/noctalia/config.toml; sudo nixos-rebuild switch --flake ~/nix-dots#desktop";
       "ssh" = "kitty +kitten ssh";
     };
 

@@ -4,7 +4,6 @@
   imports = [
     inputs.caelestia-shell.homeManagerModules.default
     inputs.spicetify-nix.homeManagerModules.spicetify
-    inputs.waterfox-flake.homeManagerModules.default
     ./modules/home/caelestia.nix
     ./modules/home/bash.nix
     ./modules/home/btop.nix
