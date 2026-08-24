@@ -13,6 +13,10 @@
       open = true;
       modesetting.enable = true;
       nvidiaSettings = false;
+      powerManagement = {
+        enable = true;
+        finegrained = false;
+      };
     };
   };
 }

@@ -1,11 +1,22 @@
 { pkgs, ... }:
 
 {
-  # Caelestia needs that
-  programs.gpu-screen-recorder.enable = true;
-
   environment.systemPackages = with pkgs; [
-    # Caelestia
-    matugen
+    grim
+    slurp
+    xdg-utils
+    rofi
+    nautilus
+    fastfetch
+    wl-clipboard
+    ddcutil
+    vicinae
+
+    ffmpeg
+    ffmpegthumbnailer
+    mpv
+    libwebp
+    libjxl
+    librsvg
   ];
 }

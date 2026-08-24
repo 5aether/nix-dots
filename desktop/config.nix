@@ -10,7 +10,7 @@
     ./modules/nixos/flatpak.nix
     ./modules/nixos/fonts.nix
     ./modules/nixos/home-manager.nix
-    ./modules/nixos/hyprland.nix
+    ./modules/nixos/sway.nix
     ./modules/nixos/locale-time.nix
     ./modules/nixos/mars-display.nix
     ./modules/nixos/networking.nix

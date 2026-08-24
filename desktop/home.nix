@@ -8,11 +8,11 @@
     ./modules/home/cm-redirect.nix
     ./modules/home/git.nix
     ./modules/home/gtk.nix
-    ./modules/home/hyprland.nix
     ./modules/home/kitty.nix
     ./modules/home/neovim.nix
     ./modules/home/packages.nix
     ./modules/home/spicetify.nix
+    ./modules/home/sway.nix
   ];
 
   home = {
