@@ -12,6 +12,6 @@ in {
       volumePercentage
       catJamSynced
     ];
-    theme = spicePkgs.themes.comfy;
+    theme = spicePkgs.themes.starryNight;
   };
 }

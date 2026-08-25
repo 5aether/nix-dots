@@ -13,9 +13,9 @@
 
     mars-display.url = "github:5aether/mars-display";
 
-    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
-
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+
+    nixcord.url = "github:4evy/nixcord";
   };
 
   outputs = inputs@{ self, nixpkgs, ... }: {

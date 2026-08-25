@@ -3,9 +3,10 @@
 {
   imports = [
     inputs.spicetify-nix.homeManagerModules.spicetify
+    inputs.nixcord.homeModules.nixcord
     ./modules/home/bash.nix
-    ./modules/home/btop.nix
     ./modules/home/cm-redirect.nix
+    ./modules/home/discord.nix
     ./modules/home/git.nix
     ./modules/home/gtk.nix
     ./modules/home/kitty.nix
@@ -13,6 +14,7 @@
     ./modules/home/packages.nix
     ./modules/home/spicetify.nix
     ./modules/home/sway.nix
+    ./modules/home/waybar.nix
   ];
 
   home = {

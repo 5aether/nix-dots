@@ -2,13 +2,10 @@
 
 {
   home.packages = with pkgs; [
-    waybar
-
     # Editor
     zed-editor
 
     # Social
-    equibop
     materialgram
 
     # Gaming

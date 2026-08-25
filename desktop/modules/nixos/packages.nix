@@ -11,6 +11,7 @@
     wl-clipboard
     ddcutil
     vicinae
+    btop
 
     ffmpeg
     ffmpegthumbnailer

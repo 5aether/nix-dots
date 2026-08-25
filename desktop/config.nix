@@ -17,7 +17,6 @@
     ./modules/nixos/nvidia.nix
     ./modules/nixos/packages.nix
     ./modules/nixos/pipewire.nix
-    ./modules/nixos/repos.nix
     ./modules/nixos/services.nix
     ./modules/nixos/steam.nix
     ./modules/nixos/tailscale.nix
