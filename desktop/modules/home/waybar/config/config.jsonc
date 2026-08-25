@@ -1,0 +1,85 @@
+{
+    "layer": "top",
+    "position": "top",
+    "margin-top": 7,
+    "margin-left": 7,
+    "margin-right": 7,
+    "margin-bottom": 0,
+    "spacing": 7,
+    "modules-left": [
+        "sway/workspaces"
+    ],
+    "modules-center": [
+        "custom/player"
+    ],
+    "modules-right": [
+        "tray",
+        "custom/wifi",
+        "custom/ethernet",
+        "custom/volume",
+        "clock"
+    ],
+    "sway/workspaces": {
+        "disable-scroll": false,
+        "all-outputs": true,
+        "format": "{name}"
+    },
+    "tray": {
+        "spacing": 10
+    },
+    "clock": {
+        "format": "{:%a %b %d %I:%M %p}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>" // Opzionale: mostra il calendario al passaggio del mouse
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% 󰂄",
+        "format-plugged": "{capacity}% 󰚥",
+        "format-alt": "{time} {icon}",
+        "format-icons": [
+            "󰂎",
+            "󰁺",
+            "󰁽",
+            "󰂀",
+            "󰁹"
+        ]
+    },
+    "custom/wifi": {
+        "exec": "$HOME/.config/waybar/scripts/wifi.sh",
+        "return-type": "json",
+        "format": "{}",
+        "tooltip": false,
+        "on-click": "vicinae cmd launch @dagimg-dot/store.vicinae.wifi-commander:scan-wifi",
+        "on-click-right": "$HOME/.config/waybar/scripts/wifi-toggle.sh"
+    },
+    "custom/ethernet": {
+        "exec": "$HOME/.config/waybar/scripts/ethernet.sh",
+        "return-type": "json",
+        "format": "{}",
+        "tooltip": false,
+        "on-click-right": "$HOME/.config/waybar/scripts/ethernet-toggle.sh"
+    },
+    "custom/volume": {
+        "exec": "$HOME/.config/waybar/scripts/volume.sh",
+        "return-type": "json",
+        "format": "{}",
+        "tooltip": false,
+        "on-click": "vicinae cmd launch @rastsislaux/store.vicinae.pulseaudio:outputDevices",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ --limit 1.0",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+    },
+    "custom/player": {
+        "exec": "playerctl metadata --format '{{title}} - {{artist}}' --follow 2>/dev/null",
+        "format": "{}",
+        "max-length": 40,
+        "tooltip": false,
+        "on-click": "playerctl play-pause && pkill -RTMIN+8 waybar",
+        "on-scroll-up": "playerctl next && pkill -RTMIN+8 waybar",
+        "on-scroll-down": "playerctl previous && pkill -RTMIN+8 waybar"
+    }
+}

@@ -1,0 +1,104 @@
+@import "./schemes/rose-pine.css";
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Caskaydia Cove Medium", "CaskaydiaMono Nerd Font Mono Semibold";
+    font-size: 14px;
+    min-height: 0;
+}
+#mpris,
+#custom-wifi,
+#custom-ethernet,
+#custom-volume,
+#battery,
+#tray {
+    padding: 0 4px;
+    margin: 4px 4px;
+    border-radius: 0px;
+    background-color: @surface;
+}
+window#waybar {
+    background-color: @base;
+    color: @text;
+    border-radius: 0px;
+    border: 2px solid @highlightMed;
+}
+#workspaces {
+    padding: 0px;
+    margin: 4px 4px;
+    border-radius: 0px;
+    background-color: @surface;
+} 
+#clock {
+    padding: 0 4px;
+    margin: 4px 7px 4px 0px;
+    border-radius: 0px;
+    background-color: @surface;    
+}
+#workspaces button {
+    padding: 0 10px;
+    color: @subtle;
+    background-color: transparent;
+    transition: all 0.2s ease;
+}
+#workspaces button:hover {
+    background-color: @highlightLow;
+    color: @text;
+    border-radius: 0px;
+}
+#workspaces button.focused {
+    background-color: @iris;
+    color: @base;
+    border-radius: 0px;
+}
+#workspaces button.urgent {
+    background-color: @love;
+    color: @base;
+    border-radius: 0px;
+}
+#window {
+    background-color: transparent;
+    color: @text;
+    font-weight: bold;
+}
+#clock {
+    color: @iris;
+}
+#battery {
+    color: @iris;
+}
+#battery.warning {
+    color: @gold;
+}
+#battery.critical {
+    background-color: @love;
+    color: @base;
+}
+#tray {
+    background-color: transparent;
+}
+#custom-wifi {
+    color: @iris;
+}
+#custom-wifi.off {
+    color: @muted;
+}
+#custom-wifi.on {
+    color: @iris;
+}
+#custom-ethernet {
+    color: @iris;
+}
+#custom-ethernet.disconnected {
+    color: @muted;
+}
+#custom-volume {
+    color: @iris;
+}
+#custom-volume.muted {
+    color: @muted;
+}
+#custom-player {
+    color: @iris;
+}

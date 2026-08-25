@@ -4,6 +4,7 @@
   imports = [
     inputs.spicetify-nix.homeManagerModules.spicetify
     inputs.nixcord.homeModules.nixcord
+    ./modules/home/waybar/package.nix
     ./modules/home/bash.nix
     ./modules/home/cm-redirect.nix
     ./modules/home/discord.nix
@@ -16,7 +17,6 @@
     ./modules/home/sway.nix
     ./modules/home/swaync.nix
     ./modules/home/vicinae.nix
-    ./modules/home/waybar.nix
   ];
 
   home = {

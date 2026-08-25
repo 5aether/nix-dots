@@ -11,8 +11,8 @@
     enable = true;
 
     font = {
-      name = "Maple Mono NF CN";
-      package = pkgs.maple-mono.NF-CN;
+      name = "Comfortaa";
+      package = pkgs.comfortaa;
       size = 11;
     };
 
