@@ -14,6 +14,8 @@
     ./modules/home/packages.nix
     ./modules/home/spicetify.nix
     ./modules/home/sway.nix
+    ./modules/home/swaync.nix
+    ./modules/home/vicinae.nix
     ./modules/home/waybar.nix
   ];
 

@@ -10,7 +10,6 @@
     fastfetch
     wl-clipboard
     ddcutil
-    vicinae
     btop
     playerctl
 
