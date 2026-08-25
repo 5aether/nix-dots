@@ -14,6 +14,7 @@
   # sway
   programs.sway = {
     enable = true;
+    wrapperFeatures.gtk = true;
     extraOptions = [ "--unsupported-gpu" ];
   };
 
@@ -77,5 +78,8 @@
     };
   };
 
-  services.dbus.implementation = "broker";
+  services.dbus = {
+    enable = true;
+    implementation = "broker";
+  };
 }
