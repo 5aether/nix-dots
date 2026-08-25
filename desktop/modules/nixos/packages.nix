@@ -12,8 +12,6 @@
     ddcutil
     btop
     playerctl
-    rbw
-    pinentry
 
     ffmpeg
     ffmpegthumbnailer
