@@ -4,6 +4,7 @@
   wayland.windowManager.sway = {
     enable = true;
     systemd.enable = true;
+    extraOptions = [ "--unsupported-gpu" ];
 
     config = rec {
       modifier = "Mod4";
@@ -112,6 +113,8 @@
         "${modifier}+c" = "kill";
         "${modifier}+r" = "exec ${menu}";
         "${modifier}+a" = "reload";
+        "${modifier}+Shift+s" = "exec ast region";
+        "Print" = "exec ast output";
         "${modifier}+l" =
           "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
 
