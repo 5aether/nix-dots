@@ -16,6 +16,8 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
     nixcord.url = "github:4evy/nixcord";
+
+    awt.url = "github:5aether/awt";
   };
 
   outputs = inputs@{ self, nixpkgs, ... }: {

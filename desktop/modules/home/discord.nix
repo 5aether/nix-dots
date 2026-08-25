@@ -9,7 +9,7 @@
     };
 
     quickCss = "
-      @import url('https://raw.githubusercontent.com/refact0r/midnight-discord/refs/heads/master/themes/midnight.theme.css');
+      @import url('https://raw.githubusercontent.com/refact0r/midnight-discord/refs/heads/master/themes/flavors/midnight-rose-pine.theme.css');
     ";
     config = {
       useQuickCss = true;

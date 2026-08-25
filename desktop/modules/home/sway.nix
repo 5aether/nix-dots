@@ -37,6 +37,42 @@
         border = 2;
       };
 
+      colors = {
+        background = "#191724"; # base
+
+        focused = {
+          border = "#c4a7e7";       # iris
+          background = "#26233a";   # overlay
+          text = "#e0def4";         # text
+          indicator = "#ebbcba";    # rose
+          childBorder = "#c4a7e7";  # iris
+        };
+
+        focusedInactive = {
+          border = "#6e6a86";       # muted
+          background = "#1f1d2e";   # surface
+          text = "#e0def4";         # text
+          indicator = "#26233a";    # overlay
+          childBorder = "#6e6a86";  # muted
+        };
+
+        unfocused = {
+          border = "#26233a";       # overlay
+          background = "#191724";   # base
+          text = "#908caa";         # subtle
+          indicator = "#1f1d2e";    # surface
+          childBorder = "#26233a";  # overlay
+        };
+
+        urgent = {
+          border = "#eb6f92";       # love
+          background = "#eb6f92";   # love
+          text = "#e0def4";         # text
+          indicator = "#ebbcba";    # rose
+          childBorder = "#eb6f92";  # love
+        };
+      };
+
       gaps = {
         inner = 5;
         outer = 10;
@@ -130,6 +166,7 @@
     extraConfig = ''
       exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
       exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+      exec awt start
       exec vicinae server
       exec waybar
 

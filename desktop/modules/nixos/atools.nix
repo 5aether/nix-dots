@@ -1,0 +1,5 @@
+{
+  programs = {
+    awt.enable = true;
+  };
+}
