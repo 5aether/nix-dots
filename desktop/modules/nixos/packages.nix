@@ -12,6 +12,7 @@
     ddcutil
     btop
     playerctl
+    rbw
 
     ffmpeg
     ffmpegthumbnailer
