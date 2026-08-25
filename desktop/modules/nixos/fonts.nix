@@ -14,7 +14,7 @@
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {
-      monospace = [ "Maple Mono NF" "Noto Sans CJK JP" ];
+      monospace = [ "Maple Mono NF CN" "Noto Sans CJK JP" ];
       sansSerif = [ "Comfortaa" "Noto Sans" "Noto Sans CJK JP" ];
       serif     = [ "Noto Serif" "Noto Serif CJK JP" ];
       emoji     = [ "Noto Color Emoji" ];

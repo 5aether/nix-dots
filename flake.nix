@@ -18,6 +18,8 @@
     nixcord.url = "github:4evy/nixcord";
 
     awt.url = "github:5aether/awt";
+
+    ast.url = "github:5aether/ast";
   };
 
   outputs = inputs@{ self, nixpkgs, ... }: {

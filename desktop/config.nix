@@ -6,6 +6,7 @@
     inputs.mars-display.nixosModules.default
     inputs.nix-flatpak.nixosModules.nix-flatpak
     inputs.awt.nixosModules.default
+    inputs.ast.nixosModules.default
     ./modules/nixos/atools.nix
     ./modules/nixos/boot.nix
     ./modules/nixos/cups.nix
