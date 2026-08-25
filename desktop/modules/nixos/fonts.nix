@@ -8,15 +8,14 @@
     noto-fonts-color-emoji
     maple-mono.NF-CN
     liberation_ttf
-    comfortaa
   ];
 
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {
       monospace = [ "Maple Mono NF CN" "Noto Sans CJK JP" ];
-      sansSerif = [ "Comfortaa" "Noto Sans" "Noto Sans CJK JP" ];
-      serif     = [ "Noto Serif" "Noto Serif CJK JP" ];
+      sansSerif = [ "Maple Mono NF CN" "Noto Sans CJK JP" ];
+      serif     = [ "Maple Mono NF CN" "Noto Serif CJK JP" ];
       emoji     = [ "Noto Color Emoji" ];
     };
   };
