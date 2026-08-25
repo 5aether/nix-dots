@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -7,6 +7,9 @@
     graphics = {
       enable = true;
       enable32Bit = true;
+      extraPackages = with pkgs; [
+        nvidia-vaapi-driver
+      ];
     };
     nvidia = {
       package = config.boot.kernelPackages.nvidiaPackages.stable;

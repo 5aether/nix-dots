@@ -4,11 +4,10 @@
   wayland.windowManager.sway = {
     enable = true;
     systemd.enable = true;
-    extraOptions = [ "--unsupported-gpu" ];
 
     config = rec {
       modifier = "Mod4";
-      terminal = "kitty";
+      terminal = "foot";
       menu = "vicinae toggle";
 
       input = {
@@ -23,7 +22,7 @@
 
       seat = {
         "*" = {
-          xcursor_theme = "Bibata-Modern-Classic 16";
+          xcursor_theme = "BreezeX-RosePine-Linux 16";
         };
       };
 
@@ -170,12 +169,9 @@
       exec vicinae server
       exec waybar
 
-      bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
-      bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
-      bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
-
-      bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
-      bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+      bindsym --locked XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+      bindsym --locked XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+      bindsym --locked XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ 
     '';
   };
 }

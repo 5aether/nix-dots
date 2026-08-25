@@ -12,6 +12,7 @@
     ddcutil
     vicinae
     btop
+    playerctl
 
     ffmpeg
     ffmpegthumbnailer

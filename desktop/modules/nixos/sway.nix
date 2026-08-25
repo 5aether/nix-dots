@@ -17,6 +17,15 @@
     extraOptions = [ "--unsupported-gpu" ];
   };
 
+  # sway + nvidia env
+  environment.sessionVariables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    LIBVA_DRIVER_NAME = "nvidia";
+  };
+
   # polkit
   security.polkit.enable = true;
   systemd.user.services.polkit-gnome-authentication-agent-1 = {

@@ -1,6 +1,12 @@
 { pkgs, ... }:
 
 {
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+  };
+
   gtk = {
     enable = true;
 
@@ -11,19 +17,32 @@
     };
 
     theme = {
-      name = "adw-gtk3-dark";
-      package = pkgs.adw-gtk3;
+      name = "rose-pine";
+      package = pkgs.rose-pine-gtk-theme;
     };
 
     iconTheme = {
-      name = "Papirus";
-      package = pkgs.papirus-icon-theme;
+      name = "rose-pine";
+      package = pkgs.rose-pine-icon-theme;
     };
 
     cursorTheme = {
-      name = "Bibata-Modern-Classic";
-      package = pkgs.bibata-cursors;
+      name = "BreezeX-RosePine-Linux";
+      package = pkgs.rose-pine-cursor;
       size = 16;
     };
+
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
   };
+  
+  xdg.configFile."gtk-4.0/gtk.css".source = 
+    "${pkgs.rose-pine-gtk-theme}/share/themes/rose-pine/gtk-4.0/gtk.css";
+    
+  xdg.configFile."gtk-4.0/gtk-dark.css".source = 
+    "${pkgs.rose-pine-gtk-theme}/share/themes/rose-pine/gtk-4.0/gtk.css";
 }

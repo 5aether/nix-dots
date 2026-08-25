@@ -9,7 +9,7 @@
     ./modules/home/discord.nix
     ./modules/home/git.nix
     ./modules/home/gtk.nix
-    ./modules/home/kitty.nix
+    ./modules/home/foot.nix
     ./modules/home/neovim.nix
     ./modules/home/packages.nix
     ./modules/home/spicetify.nix
