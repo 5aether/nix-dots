@@ -28,7 +28,7 @@
       };
 
       fonts = {
-        names = [ "Comfortaa" ];
+        names = [ "Maple Mono NF CN" ];
         size = 10.0;
       };
 
