@@ -114,6 +114,7 @@
         "${modifier}+r" = "exec ${menu}";
         "${modifier}+a" = "reload";
         "${modifier}+Shift+s" = "exec ast region";
+        "${modifier}+i" = "exec pkill waybar && waybar";
         "Print" = "exec ast output";
         "${modifier}+l" =
           "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
