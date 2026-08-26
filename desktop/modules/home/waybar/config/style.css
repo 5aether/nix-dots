@@ -7,13 +7,28 @@
     font-size: 14px;
     min-height: 0;
 }
-#mpris,
-#custom-wifi,
-#custom-ethernet,
-#custom-volume,
-#battery,
-#tray {
+
+#clock {
     padding: 0 4px;
+    margin: 4px 0px 4px 3px;
+    border-radius: 0px;
+    background-color: @surface;
+}
+#custom-wifi {
+    padding: 0 4px;
+    margin: 4px 4px;
+    border-radius: 0px;
+    background-color: @surface;
+}
+
+#battery {
+    padding: 0 4px;
+    margin: 4px 4px;
+    border-radius: 0px;
+    background-color: @surface;
+}
+#tray {
+   padding: 0 4px;
     margin: 4px 4px;
     border-radius: 0px;
     background-color: @surface;
@@ -26,16 +41,10 @@ window#waybar {
 }
 #workspaces {
     padding: 0px;
-    margin: 4px 4px;
+    margin: 4px 0px 4px 7px;
     border-radius: 0px;
     background-color: @surface;
 } 
-#clock {
-    padding: 0 4px;
-    margin: 4px 7px 4px 0px;
-    border-radius: 0px;
-    background-color: @surface;    
-}
 #workspaces button {
     padding: 0 10px;
     color: @subtle;
@@ -76,7 +85,10 @@ window#waybar {
     color: @base;
 }
 #tray {
-    background-color: transparent;
+    padding: 0 4px;
+    margin: 4px 0px 4px 0px;
+    border-radius: 0px;
+    background-color: @tray;
 }
 #custom-wifi {
     color: @iris;
@@ -88,17 +100,39 @@ window#waybar {
     color: @iris;
 }
 #custom-ethernet {
+    padding: 0 4px;
+    margin: 4px 0px 4px 3px;
+    border-radius: 0px;
     color: @iris;
+    background-color: @surface;
 }
 #custom-ethernet.disconnected {
+    padding: 0 4px;
+    margin: 4px 0px 4px 3px;
+    border-radius: 0px;
+    background-color: @surface;
     color: @muted;
+}
+#custom-player.paused {
+    opacity: 0.5;
+    /* o color: @base03; */
+}
+#custom-swaync {
+    padding: 0px 4px 0px 8px;
+    margin: 4px 7px 4px 3px;
+    border-radius: 0px;
+    color: @iris;
+    background-color: @surface;  
 }
 #custom-volume {
+    padding: 0 4px;
+    margin: 4px 0px 4px 3px;
+    border-radius: 0px;
+    min-width: 60px;
     color: @iris;
+    background-color: @surface;
 }
+
 #custom-volume.muted {
-    color: @muted;
-}
-#custom-player {
-    color: @iris;
+    color: #888888;
 }

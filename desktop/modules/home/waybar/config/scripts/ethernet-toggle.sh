@@ -1,5 +1,3 @@
-#!/bin/sh
-
 find_eth_iface() {
     for iface in /sys/class/net/*; do
         local name=$(basename "$iface")

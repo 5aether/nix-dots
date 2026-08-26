@@ -17,7 +17,8 @@
         "custom/wifi",
         "custom/ethernet",
         "custom/volume",
-        "clock"
+        "clock",
+        "custom/swaync"
     ],
     "sway/workspaces": {
         "disable-scroll": false,
@@ -61,25 +62,34 @@
         "return-type": "json",
         "format": "{}",
         "tooltip": false,
+        "on-click": "foot nmtui",
         "on-click-right": "$HOME/.config/waybar/scripts/ethernet-toggle.sh"
     },
+    "custom/player": {
+        "exec": "/home/denis/.config/waybar/scripts/player.sh",
+        "return-type": "json",
+        "format": "{text}",
+        "tooltip": false,
+        "on-click": "/home/denis/.config/waybar/scripts/player-action.sh play-pause",
+        "on-scroll-up": "/home/denis/.config/waybar/scripts/player-action.sh next",
+        "on-scroll-down": "/home/denis/.config/waybar/scripts/player-action.sh previous"
+    },
     "custom/volume": {
-        "exec": "$HOME/.config/waybar/scripts/volume.sh",
+        "exec": "/home/denis/.config/waybar/scripts/volume.sh",
         "return-type": "json",
         "format": "{}",
-        "tooltip": false,
+        "tooltip": true,
         "on-click": "vicinae cmd launch @rastsislaux/store.vicinae.pulseaudio:outputDevices",
         "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-        "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ --limit 1.0",
+        "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+",
         "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
     },
-    "custom/player": {
-        "exec": "playerctl metadata --format '{{title}} - {{artist}}' --follow 2>/dev/null",
+    "custom/swaync": {
+        "exec": "$HOME/.config/waybar/scripts/swaync.sh",
+        "return-type": "json",
         "format": "{}",
-        "max-length": 40,
-        "tooltip": false,
-        "on-click": "playerctl play-pause && pkill -RTMIN+8 waybar",
-        "on-scroll-up": "playerctl next && pkill -RTMIN+8 waybar",
-        "on-scroll-down": "playerctl previous && pkill -RTMIN+8 waybar"
+        "tooltip": true,
+        "on-click": "swaync-client -t",
+        "on-click-right": "$HOME/.config/waybar/scripts/swaync-dnd-toggle.sh"
     }
 }

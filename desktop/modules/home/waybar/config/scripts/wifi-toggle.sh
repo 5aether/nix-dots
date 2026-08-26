@@ -1,5 +1,3 @@
-#!/bin/sh
-
 if command -v nmcli >/dev/null 2>&1; then
     if [ "$(nmcli radio wifi 2>/dev/null)" = "enabled" ]; then
         nmcli radio wifi off

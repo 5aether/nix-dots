@@ -1,5 +1,3 @@
-#!/bin/sh
-
 output() {
     local text="$1"
     local class="$2"
