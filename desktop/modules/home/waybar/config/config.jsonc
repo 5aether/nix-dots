@@ -66,16 +66,16 @@
         "on-click-right": "$HOME/.config/waybar/scripts/ethernet-toggle.sh"
     },
     "custom/player": {
-        "exec": "/home/denis/.config/waybar/scripts/player.sh",
+        "exec": "$HOME/.config/waybar/scripts/player.sh",
         "return-type": "json",
         "format": "{text}",
         "tooltip": false,
-        "on-click": "/home/denis/.config/waybar/scripts/player-action.sh play-pause",
-        "on-scroll-up": "/home/denis/.config/waybar/scripts/player-action.sh next",
-        "on-scroll-down": "/home/denis/.config/waybar/scripts/player-action.sh previous"
+        "on-click": "$HOME/.config/waybar/scripts/player-action.sh play-pause",
+        "on-scroll-up": "$HOME/.config/waybar/scripts/player-action.sh next",
+        "on-scroll-down": "$HOME/.config/waybar/scripts/player-action.sh previous"
     },
     "custom/volume": {
-        "exec": "/home/denis/.config/waybar/scripts/volume.sh",
+        "exec": "$HOME/.config/waybar/scripts/volume.sh",
         "return-type": "json",
         "format": "{}",
         "tooltip": true,
