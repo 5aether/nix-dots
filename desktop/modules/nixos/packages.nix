@@ -11,6 +11,7 @@
     wl-clipboard
     ddcutil
     btop
+    jq
     playerctl
 
     ffmpeg
