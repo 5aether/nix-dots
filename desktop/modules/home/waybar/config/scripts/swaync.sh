@@ -1,5 +1,3 @@
-#!/bin/bash
-
 PIDFILE="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/waybar-swaync.pid"
 echo $$ > "$PIDFILE"
 

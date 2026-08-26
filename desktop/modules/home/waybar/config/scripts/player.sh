@@ -1,5 +1,3 @@
-#!/bin/bash
-
 FIFO="${XDG_RUNTIME_DIR:-/tmp}/waybar-player-$$.fifo"
 ACTIVE_FILE="${XDG_RUNTIME_DIR:-/tmp}/waybar-player-active"
 
