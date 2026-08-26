@@ -16,24 +16,16 @@
     enable = true;
     wrapperFeatures.gtk = true;
     extraOptions = [ "--unsupported-gpu" ];
-    extraSessionCommands = ''
-      export SDL_VIDEODRIVER=wayland
-      export QT_QPA_PLATFORM=wayland
-      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-      export _JAVA_AWT_WM_NONREPARENTING=1
-      export MOZ_ENABLE_WAYLAND=1
-      export NIXOS_OZONE_WL=1
-      export XDG_SESSION_TYPE=wayland
-      export XDG_SESSION_DESKTOP=sway
-      export XDG_CURRENT_DESKTOP=sway
+  };
 
-      # sway + nvidia
-      export LIBVA_DRIVER_NAME=nvidia
-      export GBM_BACKEND=nvidia-drm
-      export __GLX_VENDOR_LIBRARY_NAME=nvidia
-      export WLR_NO_HARDWARE_CURSORS=1
-      export __GL_GSYNC_ALLOWED=0
-    '';
+  # sway + nvidia env
+  environment.sessionVariables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
+    MOZ_ENABLE_WAYLAND = "1";
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    LIBVA_DRIVER_NAME = "nvidia";
   };
 
   # polkit
